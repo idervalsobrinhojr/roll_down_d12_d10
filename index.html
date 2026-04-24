@@ -305,7 +305,7 @@
                     <div class="result-detail" id="detalheD12">(D12₁ + D12₂)</div>
                 </div>
                 <div class="result-box">
-                    <h3>📊 TOTAL (D12 + ATRIBUTO + MOD)</h3>
+                    <h3>📊 TOTAL (ATRIBUTO + MOD)</h3>
                     <div class="result-value" id="totalFinal">0</div>
                     <div class="result-detail" id="detalheTotal">(Soma D12 + Atributo + Mod)</div>
                 </div>
@@ -356,7 +356,7 @@
 
         function updateResults(atributo, modificador, d12Results, esperanca, medo) {
             const somaD12 = d12Results[0] + d12Results[1];
-            const totalFinal = somaD12 + atributo + modificador;
+            const totalFinal = atributo + modificador;
             
             // Atualiza a SOMA DOS D12
             somaD12Div.textContent = somaD12;
@@ -364,7 +364,7 @@
             
             // Atualiza o TOTAL FINAL
             totalFinalDiv.textContent = totalFinal;
-            detalheTotal.innerHTML = `(${somaD12} + ${atributo} + ${modificador})`;
+            detalheTotal.innerHTML = `(${atributo} + ${modificador})`;
             
             // Comparação Esperança vs Medo
             let comparacao = '';
@@ -413,7 +413,7 @@
             somaD12Div.textContent = '0';
             totalFinalDiv.textContent = '0';
             detalheD12.innerHTML = '(D12₁ + D12₂)';
-            detalheTotal.innerHTML = '(Soma D12 + Atributo + Mod)';
+            detalheTotal.innerHTML = '(Atributo + Mod)';
             comparisonMessage.innerHTML = 'Campos limpos! Clique em ROLAR DADOS para começar!';
         }
 
