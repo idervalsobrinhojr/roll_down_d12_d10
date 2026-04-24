@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#2c3e50">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Dados da Esperança</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            backdrop-filter: blur(10px);
+        }
+
+        .inputs-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            font-size: 24px;
+            text-align: center;
+            border: 2px solid #ddd;
+            border-radius: 15px;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .buttons-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: #667eea;
+            color: white;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        .roll-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .clear-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .dice-section {
+            text-align: center;
+        }
+
+        .d12-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .dice {
+            text-align: center;
+        }
+
+        .dice-value {
+            font-size: 48px;
+            font-weight: bold;
+            background: #2c3e50;
+            color: white;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .d12-color {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .d10-esperanca {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .d10-medo {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .dice-label {
+            font-size: 12px;
+            color: #7f8c8d;
+            font-weight: bold;
+        }
+
+        .result-message {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ecf0f1;
+            border-radius: 15px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        /* Animação dos dados */
+        @keyframes rollDice {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            25% {
+                transform: rotate(90deg) scale(1.2);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+            }
+            75% {
+                transform: rotate(270deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        .rolling {
+            animation: rollDice 0.5s ease-out;
+        }
+
+        @media (max-width: 600px) {
+            .inputs-section {
+                gap: 15px;
+            }
+            
+            .dice-value {
+                width: 70px;
+                height: 70px;
+                font-size: 32px;
+            }
+            
+            button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="inputs-section">
+            <div class="input-group">
+                <label>📊 ATRIBUTO</label>
+                <input type="number" id="atributo" value="0" step="1">
+            </div>
+            <div class="input-group">
+                <label>⚡ MODIFICADOR</label>
+                <input type="number" id="modificador" value="0" step="1">
+            </div>
+        </div>
+
+        <div class="buttons-section">
+            <button class="roll-btn" id="rollBtn">🎲 ROLAR DADOS</button>
+            <button class="clear-btn" id="clearBtn">🗑️ LIMPAR</button>
+        </div>
+
+        <div class="dice-section">
+            <div class="d12-container">
+                <div class="dice">
+                    <div class="dice-value d12-color" id="d12_1">-</div>
+                    <div class="dice-label">D12 1</div>
+                </div>
+                <div class="dice">
+                    <div class="dice-value d12-color" id="d12_2">-</div>
+                    <div class="dice-label">D12 2</div>
+                </div>
+            </div>
+
+            <div class="d12-container">
+                <div class="dice">
+                    <div class="dice-value d10-esperanca" id="d10_esperanca">-</div>
+                    <div class="dice-label">ESPERANÇA</div>
+                </div>
+                <div class="dice">
+                    <div class="dice-value d10-medo" id="d10_medo">-</div>
+                    <div class="dice-label">MEDO</div>
+                </div>
+            </div>
+
+            <div class="result-message" id="resultMessage">
+                Clique em ROLAR DADOS para começar!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(reg => console.log('Service Worker registrado!', reg))
+                .catch(err => console.log('Erro ao registrar Service Worker:', err));
+        }
+
+        const rollBtn = document.getElementById('rollBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const atributoInput = document.getElementById('atributo');
+        const modificadorInput = document.getElementById('modificador');
+        
+        const d12_1 = document.getElementById('d12_1');
+        const d12_2 = document.getElementById('d12_2');
+        const d10_esperanca = document.getElementById('d10_esperanca');
+        const d10_medo = document.getElementById('d10_medo');
+        const resultMessage = document.getElementById('resultMessage');
+
+        function rollDice(sides) {
+            return Math.floor(Math.random() * sides) + 1;
+        }
+
+        function animateDice(element) {
+            element.classList.remove('rolling');
+            void element.offsetWidth;
+            element.classList.add('rolling');
+            setTimeout(() => {
+                element.classList.remove('rolling');
+            }, 500);
+        }
+
+        function updateResult(atributo, modificador, d12Results, esperanca, medo) {
+            const somaD12 = d12Results[0] + d12Results[1];
+            const total = somaD12 + atributo + modificador;
+            
+            let mensagem = `🎯 TOTAL: ${total} = (${d12Results[0]} + ${d12Results[1]}) + ${atributo} + ${modificador}\n`;
+            mensagem += `✨ Esperança: ${esperanca} | 😰 Medo: ${medo}`;
+            
+            if (esperanca > medo) {
+                mensagem += `\n🌟 A ESPERANÇA VENCEU! 🌟`;
+            } else if (medo > esperanca) {
+                mensagem += `\n😨 O MEDO DOMINOU! 😨`;
+            } else {
+                mensagem += `\n⚖️ EQUILÍBRIO PERFEITO! ⚖️`;
+            }
+            
+            resultMessage.innerHTML = mensagem.replace(/\n/g, '<br>');
+        }
+
+        function rollAllDice() {
+            const atributo = parseInt(atributoInput.value) || 0;
+            const modificador = parseInt(modificadorInput.value) || 0;
+            
+            const d12_1_val = rollDice(12);
+            const d12_2_val = rollDice(12);
+            const esperanca_val = rollDice(10);
+            const medo_val = rollDice(10);
+            
+            animateDice(d12_1);
+            animateDice(d12_2);
+            animateDice(d10_esperanca);
+            animateDice(d10_medo);
+            
+            setTimeout(() => {
+                d12_1.textContent = d12_1_val;
+                d12_2.textContent = d12_2_val;
+                d10_esperanca.textContent = esperanca_val;
+                d10_medo.textContent = medo_val;
+                
+                updateResult(atributo, modificador, [d12_1_val, d12_2_val], esperanca_val, medo_val);
+            }, 250);
+        }
+
+        function clearFields() {
+            atributoInput.value = 0;
+            modificadorInput.value = 0;
+            d12_1.textContent = '-';
+            d12_2.textContent = '-';
+            d10_esperanca.textContent = '-';
+            d10_medo.textContent = '-';
+            resultMessage.innerHTML = 'Campos limpos! Clique em ROLAR DADOS para começar!';
+        }
+
+        rollBtn.addEventListener('click', rollAllDice);
+        clearBtn.addEventListener('click', clearFields);
+        
+        atributoInput.addEventListener('input', function() {
+            if (this.value === '') this.value = 0;
+        });
+        
+        modificadorInput.addEventListener('input', function() {
+            if (this.value === '') this.value = 0;
+        });
+    </script>
+</body>
+</html>
