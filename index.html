@@ -197,6 +197,33 @@
             margin-top: 5px;
         }
 
+        .status-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 20px;
+            margin: 20px 0;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .status-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .status-result {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .status-detail {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
         .comparison-box {
             margin-top: 20px;
             padding: 15px;
@@ -205,6 +232,15 @@
             font-weight: bold;
             color: #2c3e50;
             text-align: center;
+        }
+
+        /* Cores para os status */
+        .sucesso {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+        }
+
+        .fracasso {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
         }
 
         /* Animação dos dados */
@@ -253,6 +289,10 @@
             .result-box {
                 min-width: 140px;
             }
+
+            .status-result {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
@@ -297,7 +337,7 @@
                 </div>
             </div>
 
-            <!-- Somas separadas e isoladas -->
+            <!-- Somas isoladas -->
             <div class="results-summary">
                 <div class="result-box">
                     <h3>🎲 SOMA DOS D12</h3>
@@ -305,15 +345,22 @@
                     <div class="result-detail" id="detalheD12">(D12₁ + D12₂)</div>
                 </div>
                 <div class="result-box">
-                    <h3>📊 TOTAL (ATRIBUTO + MOD)</h3>
-                    <div class="result-value" id="totalFinal">0</div>
-                    <div class="result-detail" id="detalheTotal">(Soma D12 + Atributo + Mod)</div>
+                    <h3>📊 SOMA (ATRIBUTO + MOD)</h3>
+                    <div class="result-value" id="somaAtributoMod">0</div>
+                    <div class="result-detail" id="detalheAtributoMod">(Atributo + Modificador)</div>
                 </div>
+            </div>
+
+            <!-- Status de Sucesso/Fracasso -->
+            <div class="status-box" id="statusBox">
+                <div class="status-title">RESULTADO DA JOGADA</div>
+                <div class="status-result" id="statusResult">-</div>
+                <div class="status-detail" id="statusDetail">Clique em ROLAR DADOS para começar</div>
             </div>
 
             <!-- Comparação Esperança vs Medo -->
             <div class="comparison-box" id="comparisonMessage">
-                Clique em ROLAR DADOS para começar!
+                Aguardando rolagem...
             </div>
         </div>
     </div>
@@ -336,9 +383,13 @@
         const d10_medo = document.getElementById('d10_medo');
         
         const somaD12Div = document.getElementById('somaD12');
-        const totalFinalDiv = document.getElementById('totalFinal');
+        const somaAtributoModDiv = document.getElementById('somaAtributoMod');
         const detalheD12 = document.getElementById('detalheD12');
-        const detalheTotal = document.getElementById('detalheTotal');
+        const detalheAtributoMod = document.getElementById('detalheAtributoMod');
+        
+        const statusBox = document.getElementById('statusBox');
+        const statusResult = document.getElementById('statusResult');
+        const statusDetail = document.getElementById('statusDetail');
         const comparisonMessage = document.getElementById('comparisonMessage');
 
         function rollDice(sides) {
@@ -354,28 +405,72 @@
             }, 500);
         }
 
+        function determineStatus(somaD12, atributo, modificador, esperanca, medo) {
+            const somaAtributoMod = atributo + modificador;
+            let status = '';
+            let statusText = '';
+            let statusDetailText = '';
+            let boxClass = '';
+            
+            // Regra principal: Sucesso ou Fracasso
+            if (somaD12 > somaAtributoMod) {
+                status = 'fracasso';
+                statusText = '❌ FRACASSO ❌';
+                boxClass = 'fracasso';
+                statusDetailText = `Os dados (${somaD12}) superaram sua capacidade (${somaAtributoMod})`;
+            } else {
+                status = 'sucesso';
+                statusText = '✅ SUCESSO ✅';
+                boxClass = 'sucesso';
+                statusDetailText = `Sua capacidade (${somaAtributoMod}) superou os dados (${somaD12})`;
+            }
+            
+            // Verificação do elemento emocional
+            let emocao = '';
+            if (esperanca === medo) {
+                if (somaD12 > 2) {
+                    emocao = ' 🔥 REVIRAVOLTA! 🔥';
+                    statusDetailText += ' - REVIRAVOLTA! Momentos de virada épica!';
+                } else {
+                    emocao = ' ⚖️ JOGADA COM ESPERANÇA ⚖️';
+                    statusDetailText += ' - Equilíbrio perfeito! A esperança prevalece!';
+                }
+            } else if (esperanca > medo) {
+                emocao = ' ✨ JOGADA COM ESPERANÇA ✨';
+                statusDetailText += ' - A esperança guia seus passos!';
+            } else {
+                emocao = ' 😨 JOGADA COM MEDO 😨';
+                statusDetailText += ' - O medo tenta te paralisar...';
+            }
+            
+            // Atualiza a caixa de status com a cor correspondente
+            statusBox.className = `status-box ${boxClass}`;
+            
+            return {
+                statusText: statusText + emocao,
+                statusDetailText: statusDetailText
+            };
+        }
+
         function updateResults(atributo, modificador, d12Results, esperanca, medo) {
             const somaD12 = d12Results[0] + d12Results[1];
-            const totalFinal = atributo + modificador;
+            const somaAtributoMod = atributo + modificador;
             
             // Atualiza a SOMA DOS D12
             somaD12Div.textContent = somaD12;
             detalheD12.innerHTML = `(${d12Results[0]} + ${d12Results[1]})`;
             
-            // Atualiza o TOTAL FINAL
-            totalFinalDiv.textContent = totalFinal;
-            detalheTotal.innerHTML = `(${atributo} + ${modificador})`;
+            // Atualiza a SOMA (ATRIBUTO + MODIFICADOR)
+            somaAtributoModDiv.textContent = somaAtributoMod;
+            detalheAtributoMod.innerHTML = `(${atributo} + ${modificador})`;
             
-            // Comparação Esperança vs Medo
-            let comparacao = '';
-            if (esperanca > medo) {
-                comparacao = `✨✨✨ A ESPERANÇA VENCEU! ✨✨✨<br>Esperança: ${esperanca} | Medo: ${medo}`;
-            } else if (medo > esperanca) {
-                comparacao = `😨😨😨 O MEDO DOMINOU! 😨😨😨<br>Esperança: ${esperanca} | Medo: ${medo}`;
-            } else {
-                comparacao = `⚖️⚖️⚖️ EQUILÍBRIO PERFEITO! ⚖️⚖️⚖️<br>Esperança: ${esperanca} | Medo: ${medo}`;
-            }
+            // Determina o status da jogada
+            const status = determineStatus(somaD12, atributo, modificador, esperanca, medo);
+            statusResult.innerHTML = status.statusText;
+            statusDetail.innerHTML = status.statusDetailText;
             
+            // Comparação Esperança vs Medo (mantido para referência)
+            let comparacao = `🎲 Dados: ${d12Results[0]} e ${d12Results[1]} | Esperança: ${esperanca} | Medo: ${medo}`;
             comparisonMessage.innerHTML = comparacao;
         }
 
@@ -411,9 +506,14 @@
             d10_esperanca.textContent = '-';
             d10_medo.textContent = '-';
             somaD12Div.textContent = '0';
-            totalFinalDiv.textContent = '0';
+            somaAtributoModDiv.textContent = '0';
             detalheD12.innerHTML = '(D12₁ + D12₂)';
-            detalheTotal.innerHTML = '(Atributo + Mod)';
+            detalheAtributoMod.innerHTML = '(Atributo + Modificador)';
+            
+            // Reset do status
+            statusBox.className = 'status-box';
+            statusResult.innerHTML = '-';
+            statusDetail.innerHTML = 'Clique em ROLAR DADOS para começar';
             comparisonMessage.innerHTML = 'Campos limpos! Clique em ROLAR DADOS para começar!';
         }
 
