@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dados-esperanca-v1';
+const CACHE_NAME = 'dados-esperanca-v2';
 
 // Arquivos para cache (usando caminhos relativos)
 const urlsToCache = [
