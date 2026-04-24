@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
     <meta name="theme-color" content="#2c3e50">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -23,15 +23,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 10px;
         }
 
         .container {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 30px;
-            padding: 30px 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 650px;
+            border-radius: 20px;
+            padding: 15px 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            max-width: 500px;
             width: 100%;
             backdrop-filter: blur(10px);
         }
@@ -39,32 +39,32 @@
         .inputs-section {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 15px;
+            flex-wrap: nowrap;
         }
 
         .input-group {
             text-align: center;
             flex: 1;
-            min-width: 120px;
+            min-width: 0;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-weight: bold;
             color: #2c3e50;
-            font-size: 14px;
+            font-size: 11px;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px;
-            font-size: 24px;
+            padding: 8px;
+            font-size: 18px;
             text-align: center;
             border: 2px solid #ddd;
-            border-radius: 15px;
+            border-radius: 12px;
             transition: all 0.3s;
             font-weight: bold;
         }
@@ -72,24 +72,25 @@
         .input-group input:focus {
             outline: none;
             border-color: #667eea;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
         }
 
         .buttons-section {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
         button {
-            padding: 12px 30px;
-            font-size: 18px;
+            padding: 8px 20px;
+            font-size: 14px;
             font-weight: bold;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             cursor: pointer;
             transition: transform 0.2s, box-shadow 0.2s;
+            flex: 1;
         }
 
         button:active {
@@ -99,13 +100,13 @@
         .roll-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
         }
 
         .clear-btn {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.4);
+            box-shadow: 0 2px 8px rgba(245, 87, 108, 0.4);
         }
 
         .dice-section {
@@ -115,28 +116,29 @@
         .d12-container {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: nowrap;
         }
 
         .dice {
             text-align: center;
+            flex: 1;
         }
 
         .dice-value {
-            font-size: 48px;
+            font-size: 32px;
             font-weight: bold;
             background: #2c3e50;
             color: white;
-            width: 100px;
-            height: 100px;
+            width: 65px;
+            height: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
-            margin-bottom: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-radius: 15px;
+            margin: 0 auto 5px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.2);
             transition: all 0.3s;
         }
 
@@ -153,7 +155,7 @@
         }
 
         .dice-label {
-            font-size: 12px;
+            font-size: 9px;
             color: #7f8c8d;
             font-weight: bold;
         }
@@ -161,75 +163,75 @@
         .results-summary {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin: 25px 0;
-            flex-wrap: wrap;
+            gap: 12px;
+            margin: 15px 0;
+            flex-wrap: nowrap;
         }
 
         .result-box {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            padding: 15px;
-            border-radius: 20px;
+            padding: 10px;
+            border-radius: 12px;
             flex: 1;
-            min-width: 180px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
         }
 
         .result-box h3 {
-            font-size: 14px;
+            font-size: 10px;
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             font-weight: bold;
         }
 
         .result-value {
-            font-size: 32px;
+            font-size: 22px;
             font-weight: bold;
             color: #2c3e50;
         }
 
         .result-detail {
-            font-size: 12px;
+            font-size: 9px;
             color: #7f8c8d;
-            margin-top: 5px;
+            margin-top: 3px;
         }
 
         .status-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            border-radius: 20px;
-            margin: 20px 0;
+            padding: 12px;
+            border-radius: 12px;
+            margin: 15px 0;
             text-align: center;
             color: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
         }
 
         .status-title {
-            font-size: 18px;
+            font-size: 12px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .status-result {
-            font-size: 28px;
+            font-size: 16px;
             font-weight: bold;
-            margin: 10px 0;
+            margin: 6px 0;
         }
 
         .status-detail {
-            font-size: 14px;
+            font-size: 10px;
             opacity: 0.9;
         }
 
         .comparison-box {
-            margin-top: 20px;
-            padding: 15px;
+            margin-top: 12px;
+            padding: 10px;
             background: #ecf0f1;
-            border-radius: 15px;
+            border-radius: 12px;
             font-weight: bold;
             color: #2c3e50;
             text-align: center;
+            font-size: 10px;
         }
 
         .sucesso {
@@ -245,13 +247,13 @@
                 transform: rotate(0deg) scale(1);
             }
             25% {
-                transform: rotate(90deg) scale(1.2);
+                transform: rotate(90deg) scale(1.15);
             }
             50% {
                 transform: rotate(180deg) scale(1.1);
             }
             75% {
-                transform: rotate(270deg) scale(1.2);
+                transform: rotate(270deg) scale(1.15);
             }
             100% {
                 transform: rotate(360deg) scale(1);
@@ -259,35 +261,54 @@
         }
 
         .rolling {
-            animation: rollDice 0.5s ease-out;
+            animation: rollDice 0.4s ease-out;
         }
 
-        @media (max-width: 600px) {
-            .inputs-section {
-                gap: 15px;
+        /* Ajustes para telas muito pequenas */
+        @media (max-width: 450px) {
+            .container {
+                padding: 12px 10px;
             }
             
             .dice-value {
-                width: 70px;
-                height: 70px;
-                font-size: 32px;
+                width: 55px;
+                height: 55px;
+                font-size: 28px;
+            }
+            
+            .result-value {
+                font-size: 18px;
+            }
+            
+            .status-result {
+                font-size: 14px;
             }
             
             button {
-                padding: 10px 20px;
+                padding: 6px 15px;
+                font-size: 12px;
+            }
+            
+            .input-group input {
+                padding: 6px;
                 font-size: 16px;
             }
+        }
 
+        /* Ajustes para telas muito largas (tablets) */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 550px;
+            }
+            
+            .dice-value {
+                width: 80px;
+                height: 80px;
+                font-size: 40px;
+            }
+            
             .result-value {
-                font-size: 24px;
-            }
-
-            .result-box {
-                min-width: 140px;
-            }
-
-            .status-result {
-                font-size: 22px;
+                font-size: 28px;
             }
         }
     </style>
@@ -306,7 +327,7 @@
         </div>
 
         <div class="buttons-section">
-            <button class="roll-btn" id="rollBtn">🎲 ROLAR DADOS</button>
+            <button class="roll-btn" id="rollBtn">🎲 ROLAR</button>
             <button class="clear-btn" id="clearBtn">🗑️ LIMPAR</button>
         </div>
 
@@ -314,11 +335,11 @@
             <div class="d12-container">
                 <div class="dice">
                     <div class="dice-value d12-color" id="d12_1">-</div>
-                    <div class="dice-label">D12 1</div>
+                    <div class="dice-label">D12</div>
                 </div>
                 <div class="dice">
                     <div class="dice-value d12-color" id="d12_2">-</div>
-                    <div class="dice-label">D12 2</div>
+                    <div class="dice-label">D12</div>
                 </div>
             </div>
 
@@ -335,25 +356,25 @@
 
             <div class="results-summary">
                 <div class="result-box">
-                    <h3>🎲 SOMA DOS D12</h3>
+                    <h3>🎲 SOMA D12</h3>
                     <div class="result-value" id="somaD12">0</div>
                     <div class="result-detail" id="detalheD12">(D12₁ + D12₂)</div>
                 </div>
                 <div class="result-box">
-                    <h3>📊 SOMA (ATRIBUTO + MOD)</h3>
+                    <h3>📊 ATRIB + MOD</h3>
                     <div class="result-value" id="somaAtributoMod">0</div>
-                    <div class="result-detail" id="detalheAtributoMod">(Atributo + Modificador)</div>
+                    <div class="result-detail" id="detalheAtributoMod">(Atrib + Mod)</div>
                 </div>
             </div>
 
             <div class="status-box" id="statusBox">
-                <div class="status-title">RESULTADO DA JOGADA</div>
+                <div class="status-title">RESULTADO</div>
                 <div class="status-result" id="statusResult">-</div>
-                <div class="status-detail" id="statusDetail">Clique em ROLAR DADOS para começar</div>
+                <div class="status-detail" id="statusDetail">Clique em ROLAR</div>
             </div>
 
             <div class="comparison-box" id="comparisonMessage">
-                Aguardando rolagem...
+                Aguardando...
             </div>
         </div>
     </div>
@@ -390,7 +411,7 @@
                 element.classList.add('rolling');
                 setTimeout(() => {
                     element.classList.remove('rolling');
-                }, 500);
+                }, 400);
             }
 
             function determineStatus(somaD12, atributo, modificador, esperanca, medo) {
@@ -402,28 +423,28 @@
                 if (somaD12 > somaAtributoMod) {
                     boxClass = 'fracasso';
                     statusText = '❌ FRACASSO ❌';
-                    statusDetailText = `Os dados (${somaD12}) superaram sua capacidade (${somaAtributoMod})`;
+                    statusDetailText = `Dados ${somaD12} > ${somaAtributoMod}`;
                 } else {
                     boxClass = 'sucesso';
                     statusText = '✅ SUCESSO ✅';
-                    statusDetailText = `Sua capacidade (${somaAtributoMod}) superou os dados (${somaD12})`;
+                    statusDetailText = `${somaAtributoMod} ≥ Dados ${somaD12}`;
                 }
                 
                 let emocao = '';
                 if (esperanca === medo) {
                     if (somaD12 > 2) {
-                        emocao = ' 🔥 REVIRAVOLTA! 🔥';
-                        statusDetailText += ' - REVIRAVOLTA! Momentos de virada épica!';
+                        emocao = ' 🔥 REVIRAVOLTA!';
+                        statusDetailText += ' | REVIRAVOLTA!';
                     } else {
-                        emocao = ' ⚖️ JOGADA COM ESPERANÇA ⚖️';
-                        statusDetailText += ' - Equilíbrio perfeito! A esperança prevalece!';
+                        emocao = ' ⚖️ COM ESPERANÇA';
+                        statusDetailText += ' | Equilíbrio perfeito!';
                     }
                 } else if (esperanca > medo) {
-                    emocao = ' ✨ JOGADA COM ESPERANÇA ✨';
-                    statusDetailText += ' - A esperança guia seus passos!';
+                    emocao = ' ✨ COM ESPERANÇA';
+                    statusDetailText += ' | Esperança venceu!';
                 } else {
-                    emocao = ' 😨 JOGADA COM MEDO 😨';
-                    statusDetailText += ' - O medo tenta te paralisar...';
+                    emocao = ' 😨 COM MEDO';
+                    statusDetailText += ' | Medo dominou!';
                 }
                 
                 statusBox.className = `status-box ${boxClass}`;
@@ -439,16 +460,16 @@
                 const somaAtributoMod = atributo + modificador;
                 
                 somaD12Div.textContent = somaD12;
-                detalheD12.innerHTML = `(${d12Results[0]} + ${d12Results[1]})`;
+                detalheD12.innerHTML = `(${d12Results[0]}+${d12Results[1]})`;
                 
                 somaAtributoModDiv.textContent = somaAtributoMod;
-                detalheAtributoMod.innerHTML = `(${atributo} + ${modificador})`;
+                detalheAtributoMod.innerHTML = `(${atributo}+${modificador})`;
                 
                 const status = determineStatus(somaD12, atributo, modificador, esperanca, medo);
                 statusResult.innerHTML = status.statusText;
                 statusDetail.innerHTML = status.statusDetailText;
                 
-                let comparacao = `🎲 Dados: ${d12Results[0]} e ${d12Results[1]} | Esperança: ${esperanca} | Medo: ${medo}`;
+                let comparacao = `🎲 ${d12Results[0]} ${d12Results[1]} | ✨${esperanca} 😨${medo}`;
                 comparisonMessage.innerHTML = comparacao;
             }
 
@@ -473,7 +494,7 @@
                     d10_medo.textContent = medo_val;
                     
                     updateResults(atributo, modificador, [d12_1_val, d12_2_val], esperanca_val, medo_val);
-                }, 250);
+                }, 200);
             }
 
             function clearFields() {
@@ -486,12 +507,12 @@
                 somaD12Div.textContent = '0';
                 somaAtributoModDiv.textContent = '0';
                 detalheD12.innerHTML = '(D12₁ + D12₂)';
-                detalheAtributoMod.innerHTML = '(Atributo + Modificador)';
+                detalheAtributoMod.innerHTML = '(Atrib + Mod)';
                 
                 statusBox.className = 'status-box';
                 statusResult.innerHTML = '-';
-                statusDetail.innerHTML = 'Clique em ROLAR DADOS para começar';
-                comparisonMessage.innerHTML = 'Campos limpos! Clique em ROLAR DADOS para começar!';
+                statusDetail.innerHTML = 'Clique em ROLAR';
+                comparisonMessage.innerHTML = 'Limpo! Clique ROLAR';
             }
 
             rollBtn.addEventListener('click', rollAllDice);
