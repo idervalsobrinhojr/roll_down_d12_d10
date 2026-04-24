@@ -1,8 +1,9 @@
 {
   "name": "Dados da Esperança",
   "short_name": "Dados",
-  "description": "Sistema de rolagem de dados com esperança e medo",
-  "start_url": "/",
+  "description": "Sistema de rolagem de dados com sucesso/fracasso e emoções",
+  "start_url": ".",
+  "scope": ".",
   "display": "standalone",
   "theme_color": "#2c3e50",
   "background_color": "#667eea",
